@@ -9,100 +9,6 @@ const figuras = {
 
 };
 
-let ficha = {
-    get color(){
-        this._color = this._color == undefined ? this.random(colors): this._color
-        return this._color;
-    },
-    set color(color){ 
-        this._color = color;
-    },
-
-    get forma(){
-        this._forma = this._forma == undefined? this.random(figuras): this._forma;
-        return this._forma;
-        
-    },
-    set forma(forma){ return this._forma = forma},
-
-    get rotacion(){
-        this._rotacion = this._rotacion == undefined? 0:this._rotacion;
-        return this._rotacion
-    },
-    set rotacion(rotacion){
-        this._rotacion = rotacion;
-        return;
-    },
-
-    vida: 1,
-
-    //
-    random: function(obj){
-        let key =Object.values(obj);
-        let fig = key[Math.floor(Math.random() * key.length)];
-        return fig;
-    },
-    dibujar: function(){
-        fig = this.forma[this.rotacion];
-        cua = this.forma[4]
-        bin = fig.toString(2);
-        bin = '0'.repeat((cua*cua)-bin.length)+ bin;
-        let x=0;
-        let y=0;
-        escala=100;
-        let x1 = x;
-        let y1 = y;
-        let v = 0;
-        for(i=0;i< cua*cua;i++){
-
-
-            mask = '0'.repeat(i)+'1'+'0'.repeat((cua*cua-1)-i);
-            //console.log(mask);
-            //console.log((mask&bin));
-            //console.log(parseInt(mask,2)&fig);
-            
-            if ((parseInt(mask,2)&fig) !=0){
-                fill(this.color);
-                rect(x1,y1,escala);
-                v=v+1;
-
-            
-                beginShape();
-                vertex(x1+10, y1+10);
-                vertex(x1+10,y1+escala-15);
-                vertex(x1+escala-15,y1+10);
-                vertex(x1+10, y1+10);
-                endShape();
-
-
-                beginShape();
-                vertex(x1+escala-10, y1+escala-10);
-                vertex(x1+escala-10,y1+15);
-                vertex(x1+15,y1+escala-10);
-                vertex(x1+escala-10, y1+escala-10);
-                endShape();
-               
-            }
-
-            x1=x1+escala;
-            if(((i+1)%cua) == 0){
-            y1=y1+escala;
-            x1=x;  
-            }
-            
-        }
-      
-        return bin;
-    },
-
-    rotar: function(){
-        this.rotacion = (++this.rotacion)%4;
-        return this.rotacion;
-    },
-
-};
-
-
 
 ///en construccion.
 class Ficha{
@@ -110,9 +16,9 @@ class Ficha{
         this.escala = escala;
         this.rotacion = rotacion;
         this.vida= 1;
-        this.x = 0;
-        this.y=0;
-        //this.forma = random(figuras);
+        this.x = 3*this.escala;
+        this.y=3*this.escala;
+        
     }
 
     get color(){
@@ -175,17 +81,17 @@ class Ficha{
 
             
                 beginShape();
-                vertex(x1+10, y1+10);
-                vertex(x1+10,y1+escala-15);
-                vertex(x1+escala-15,y1+10);
-                vertex(x1+10, y1+10);
+                vertex(x1+(escala/10), y1+(escala/10));
+                vertex(x1+(escala/10),y1+escala-(escala/15));
+                vertex(x1+escala-(escala/15),y1+(escala/10));
+                vertex(x1+(escala/10), y1+(escala/10));
                 endShape();
 
                 beginShape();
-                vertex(x1+escala-10, y1+escala-10);
-                vertex(x1+escala-10,y1+15);
-                vertex(x1+15,y1+escala-10);
-                vertex(x1+escala-10, y1+escala-10);
+                vertex(x1+escala-(escala/10), y1+escala-(escala/10));
+                vertex(x1+escala-(escala/10),y1+(escala/15));
+                vertex(x1+(escala/15),y1+escala-(escala/10));
+                vertex(x1+escala-(escala/10), y1+escala-(escala/10));
                 endShape();
                
             }
