@@ -55,10 +55,109 @@ class Ficha{
     mover(x,y =0){
         this.x = this.x +(this.escala*x);
         this.y = this.y +(this.escala*y);
+        if(this.verificar()){
+            this.x = this.x -(this.escala*x);
+            this.y = this.y -(this.escala*y);
+            return true;
+        }
+        return false;
     }
-    verificar(x,y){
+
+    dinamicas(){
+
+        if(tablero.frames == 60){
+
+            
+            tablero.frames = 0;
+            //verficar vida del objetof
+            
+            //figura.verificar();
+            //verificar colisiones
+            
+            if(this.mover(0,+1))
+            {
+                this.vida = 0;
+                this.verificar(1);
+                this.reiniciar();
+            }
+            
+        }
+        tablero.frames++;
+    }
+
+    verificar(x=0){
+        console.log(this.rotacion);
+        let fig = this.forma[this.rotacion];
+        let cua = this.forma[4]
+        let bin = fig.toString(2);
+        bin = '0'.repeat((cua*cua)-bin.length)+ bin;
+        let escala=this.escala;
+        let x1 = this.x/escala;
+        let y1 = this.y/escala;
+        let casillas = '';
+
+        //
+        for(let i=0;i< cua*cua;i++){
+
+            let mask = '0'.repeat(i)+'1'+'0'.repeat((cua*cua-1)-i);
+         
+            
+            if ((parseInt(mask,2)&fig) !=0){
+                switch (x) {
+                    case 0:
+                        if (x1 <=0 | y1<=0 | x1> tablero.casillas[0].length | y1> tablero.casillas.length)
+                            {
+                                console.log('ojo');
+                                
+                                return true;
+                            }
+                            else{
+                                console.log(y1);
+                                casillas = tablero.casillas[y1-1][x1-1];
+                                if(casillas != '#FFFFFF' ){
+                                    return true;
+                                }
+                                console.log(casillas);
+                                console.log(x1);
+                                console.log(y1);
+                            }
+                        break;
+                    case 1:
+                        tablero.casillas[y1-1][x1-1] =this._color;    
+                        break;
+                    default:
+                        break;
+                }
+                
+                
+
+
+                
+               
+            }
+
+            x1=x1+1;
+            if(((i+1)%cua) == 0){
+            y1=y1+1;
+            x1=this.x/escala;  
+            }
+            
+        }
+      
+    }
+
+    reiniciar(){
+    if(this.vida == 0){
+        this.color = this.random(colors);
+        this.forma = this.random(figuras);
+        this.vida= 1;
+        this.x = 4*this.escala;
+        this.y=0*this.escala; 
+    }
         
+
     }
+
     dibujar(){
         let fig = this.forma[this.rotacion];
         let cua = this.forma[4]
@@ -109,6 +208,12 @@ class Ficha{
 
     rotar(){
         this.rotacion = (++this.rotacion)%4;
+        if(this.verificar()){
+            this.rotacion = (this.rotacion-1)%4;
+            if(this.rotacion<0){
+                this.rotacion = 3;
+            }
+        }
         return this.rotacion;
     }
 

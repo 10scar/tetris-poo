@@ -44,6 +44,9 @@ function draw() {
   figura.dibujar();
   background(fondo);
   tablero.dibujar_marco();
+
+  //dinamicas
+  figura.dinamicas();
   
  
 }
