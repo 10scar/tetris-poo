@@ -16,8 +16,8 @@ class Ficha{
         this.escala = escala;
         this.rotacion = rotacion;
         this.vida= 1;
-        this.x = 3*this.escala;
-        this.y=3*this.escala;
+        this.x = 4*this.escala;
+        this.y=0*this.escala;
         
     }
 
@@ -69,16 +69,24 @@ class Ficha{
 
             
             tablero.frames = 0;
-            //verficar vida del objetof
-            
-            //figura.verificar();
+        
+         
             //verificar colisiones
             
             if(this.mover(0,+1))
             {
+                console.log('ola');
+                //si da true es por que el objeto colisiono y se regenera
                 this.vida = 0;
-                this.verificar(1);
+                //actualiza el tablero segun la ficha o verifica el game over
+                if(this.verificar(1))
+                {
+                    console.log('gamer over');
+                };
+                
                 this.reiniciar();
+                //verifica si se hace una linea despues de cada colision final.
+                tablero.verificar();
             }
             
         }
@@ -123,6 +131,9 @@ class Ficha{
                             }
                         break;
                     case 1:
+                        if(x1 <= 0 | y1<=0){
+                            return true
+                        }
                         tablero.casillas[y1-1][x1-1] =this._color;    
                         break;
                     default:
@@ -142,7 +153,7 @@ class Ficha{
             x1=this.x/escala;  
             }
             
-        }
+        }return false;
       
     }
 

@@ -46,7 +46,8 @@ function draw() {
   tablero.dibujar_marco();
 
   //dinamicas
-  figura.dinamicas();
+  //figura.dinamicas();
+  dinamicas();
   
  
 }
