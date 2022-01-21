@@ -6,10 +6,10 @@ let tamaño = {
   escala:0,
 }
 let boton_pausa;
-let img, ajustes, iniciar, pausa; 
+let img, ajustes, iniciar, pausa, muscia_juego; 
 let config, tutorial_asd,tutorial_espacio;
 let fondo;
-
+let resta;
 
 function responsive(tamaño){
   tamaño.width = window.screen.width;
@@ -48,8 +48,9 @@ function setup() {
 }
 
 function draw() {
-  
-  //figura.forma = figuras.t
+  clear();
+
+  //figura.forma = figuras.o
  
   tablero.dibujar();
   figura.dibujar();

@@ -52,6 +52,9 @@ class Ficha{
     }
 
     mover(x,y =0){
+        if(tablero.estado !=1){
+            return false;
+        }
         this.x = this.x +(this.escala*x);
         this.y = this.y +(this.escala*y);
         if(!tablero.verificar_colisiones()){
@@ -155,6 +158,9 @@ class Ficha{
 
 
     rotar(){
+        if(tablero.estado !=1){
+            return false;
+        }
         this.rotacion = (++this.rotacion)%4;
         if(!tablero.verificar_colisiones()){
             this.rotacion = (this.rotacion-1)%4;

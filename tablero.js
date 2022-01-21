@@ -3,8 +3,10 @@ class Tablero{
         this.escala = escala;
         this.frames = 0;
         this.casillas = this.array2d(dimy,dimx, '#FFFFFF');
-        this.estado = 0;
+        this.estado = 1;
         this.volumen =0.3; 
+        this.nivel =9;
+        this.lineas = 0;
     
 
     }
@@ -74,6 +76,12 @@ class Tablero{
         {
             this.casillas.splice(i,1);
             this.casillas.unshift(new Array(this.casillas[0].length).fill('#FFFFFF'));
+            this.lineas++;
+            jugador.puntuacion = (2*this.nivel)+jugador.puntuacion;
+            if(this.lineas%5 ==0){
+                this.nivel++;
+            }
+            
         }
         }
     }
@@ -146,6 +154,9 @@ class Tablero{
 
     nitro()
     {
+        if(tablero.estado !=1){
+            return false;
+        }
         let flag = true;
         while(flag){
             flag =figura.mover(0,+1);
@@ -153,6 +164,24 @@ class Tablero{
         tablero.verificar_colisiones(1);
         figura.vida = 0;
         return true;
+    }
+
+    informacion(){
+            //informacion del jugador
+        textSize(2*this.escala);
+        text(jugador.nombre,13*this.escala,2*this.escala);
+        fill(255,255,255);
+        textSize(1*this.escala);
+        text("Nivel :"+this.nivel,13*this.escala,4*this.escala);
+        text("Puntuación :"+jugador.puntuacion,13*this.escala,5*this.escala);
+        text("Lineas :"+this.lineas,13*this.escala,7*this.escala);
+    }
+
+    restablecer(){
+        this.casillas = this.array2d(this.casillas.length,this.casillas[0].length, '#FFFFFF');
+        this.nivel =0;
+        this.puntuacion=0;
+        this.lineas = 0;
     }
 
     
