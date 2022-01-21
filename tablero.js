@@ -4,6 +4,7 @@ class Tablero{
         this.frames = 0;
         this.casillas = this.array2d(dimy,dimx, '#FFFFFF');
         this.estado = 0;
+    
 
     }
 
@@ -55,7 +56,7 @@ class Tablero{
         return arr
     }
 
-    verificar(){
+    verificar_lineas(){
         let flag;
         for(let i = 0;i< this.casillas.length; i++)
         {
@@ -76,6 +77,82 @@ class Tablero{
         }
     }
 
+
+    verificar_colisiones(x=0){
+        let fig = figura.forma[figura.rotacion];
+        let cua = figura.forma[4] //tamaño de la cuadricula del bitboard
+        let bin = fig.toString(2); //numero del bitboard a base 2
+        bin = '0'.repeat((cua*cua)-bin.length)+ bin;
+        let escala=figura.escala;
+        let x1 = Math.round(figura.x/escala);
+    
+        let y1 = Math.round(figura.y/escala);
+        let casillas = '';
+
+        //
+        for(let i=0;i< cua*cua;i++){
+
+            let mask = '0'.repeat(i)+'1'+'0'.repeat((cua*cua-1)-i);
+         
+            
+            if ((parseInt(mask,2)&fig) !=0){
+
+                switch (x) {
+                    case 0:
+                        if (x1 <=0 | y1<=0 | x1> this.casillas[0].length | y1> this.casillas.length)
+                            {
+                                console.log('ojo');
+                                
+                                return false;
+                            }
+                            else{
+                                casillas = this.casillas[y1-1][x1-1];
+                                if(casillas != '#FFFFFF' ){
+                                    console.log('ojo 2');
+                                    console.log(x1);
+                                    console.log(y1);
+
+                                    return false;
+                                }
+                            }
+                        break;
+                    case 1:
+                        if(x1 <= 0 | y1<=0){
+                            console.log('ojo 3');
+                            return false
+                        }
+                        tablero.casillas[y1-1][x1-1] =figura.color;    
+                        break;
+                    default:
+                        break;
+                }
+                
+                
+
+
+                
+               
+            }
+
+            x1=x1+1;
+            if(((i+1)%cua) == 0){
+            y1=y1+1;
+            x1=Math.round(figura.x/escala);  
+            }
+            
+        }return true;   
+    }
+
+    nitro()
+    {
+        let flag = true;
+        while(flag){
+            flag =figura.mover(0,+1);
+        }
+        tablero.verificar_colisiones(1);
+        figura.vida = 0;
+        return true;
+    }
 
     
 }

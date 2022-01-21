@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.js"></script>
+    <script src="libraries/p5.clickable.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/addons/p5.dom.js"></script>
     <!-- p5 section -->
     <script src="tablero.js"></script>
@@ -20,10 +21,10 @@
 
   <body class="bg">
     
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Configuracion
-</button>
+</button> -->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -36,6 +37,8 @@
         </button>
       </div>
       <div class="modal-body">
+        <label for="musica" class="form-label">Volumen Musica</label>
+        <input type="range" class="form-range" min="0" max="1" step="0.1" id="musica">
         <h3>Tema</h3>
         <div class="row">
           <div class="col">

@@ -1,9 +1,11 @@
+let intro;
+let control_musica;
 let tamaño = {
   width: 0,
   height:0,
   escala:0,
 }
-let img;
+let img, iniciar, config, tutorial_asd,tutorial_espacio;
 let fondo;
 
 
@@ -21,6 +23,9 @@ function responsive(tamaño){
 }
 
 function setup() {
+
+  //loadrecursos();
+  
   responsive(tamaño);
   
   let cnv =createCanvas(tamaño.width, tamaño.height);
@@ -31,9 +36,13 @@ function setup() {
     cnv.position(x, y);
   
 }
-
+  //control_musica = createSlider(0, 1, 0.2, 0.2);
+  //control_musica.position(20,20);
+ 
   figura = new Ficha(0,tamaño.escala);
   tablero = new Tablero(tamaño.escala,20,10);
+  botones();
+
 }
 
 function draw() {
@@ -49,64 +58,10 @@ function draw() {
   //figura.dinamicas();
   dinamicas();
   
- 
-}
-
-///teclas
-function keyPressed() {
-  switch (keyCode) {
-    case LEFT_ARROW:
-      figura.rotar();
-      figura.rotar();
-      figura.rotar();
-      break;
-    case RIGHT_ARROW:
-     figura.rotar();
-      break;
   
-    case 87:
-        figura.mover(0,-1);
-        break;
-    case 83:
-        figura.mover(0,1);
-        break;
-    case 65:
-        figura.mover(-1,0);
-        break;
-    case 68:
-        figura.mover(1,0);
-        break;
-  }
-
-}
-
-function windowResized() {
-  responsive(tamaño);
-  resizeCanvas(windowWidth, windowHeight);
-}
-
-
-function preload(){
-  img = loadImage('img/texture2.jpg');
+  
  
 }
 
-function tema(tema){
-  img = loadImage('img/texture'+tema+'.jpg');
-  switch (tema) {
-    case 1:
-      fondo = color(250,250,50,50);
-      break;
-
-    case 2:
-      fondo = color(50,50,50,50);
-      break;
 
 
-    case 3:
-      fondo = color(50,50,250,50);
-      break;
-    default:
-      break;
-  }
-}
