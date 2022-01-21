@@ -5,7 +5,9 @@ let tamaño = {
   height:0,
   escala:0,
 }
-let img, iniciar, config, tutorial_asd,tutorial_espacio;
+let boton_pausa;
+let img, ajustes, iniciar, pausa; 
+let config, tutorial_asd,tutorial_espacio;
 let fondo;
 
 

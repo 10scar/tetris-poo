@@ -1,5 +1,5 @@
 function dinamicas(){
-
+    config.draw();
     //casos de juego, 0,iniciar tuttorial, 1 juego, 2 pausa, 3 game over
     switch (tablero.estado) {
         case 0:
@@ -10,7 +10,7 @@ function dinamicas(){
             juego();
             break;
         case 2:
-            
+            boton_pausa.draw();
             break;
     
         case 3:
@@ -26,6 +26,7 @@ function dinamicas(){
 
 
 function juego(){
+    boton_pausa.draw();
     if(tablero.frames == 60){
         tablero.frames = 0;
      
@@ -54,7 +55,7 @@ function juego(){
 
 function inicio(){
     //verifica musica
-    intro.setVolume(0.3);
+    intro.setVolume(tablero.volumen);
     if(!intro.isPlaying()){
       console.log('hola');
       intro.play();
@@ -64,6 +65,7 @@ function inicio(){
     //dibuja botones
     //jugar.draw();
     jugar.draw();
+
     image(tutorial_asd,14*tablero.escala,5*tablero.escala,7*tablero.escala,4*tablero.escala);
     image(tutorial_espacio,13*tablero.escala,10*tablero.escala,9*tablero.escala,5*tablero.escala);
     if(frameCount %60 == 0){
@@ -119,6 +121,8 @@ function keyPressed() {
     ininicar = loadImage('img/intro.gif');
     tutorial_asd = loadImage('img/asd.gif');
     tutorial_espacio = loadImage('img/espacio.gif');
+    ajustes = loadImage('img/ajustes.png');
+    pausa = loadImage('img/pausa.png');
     intro = loadSound('sound/intro.mp3');
    
   }
@@ -191,8 +195,8 @@ jugar.onOutside = function () {
 }
 
 jugar.onPress = function () {
+  intro.stop();
   figura.vida = 0;
-  figura.escala =tablero.escala;
   figura.x = 4*tablero.escala;
   figura.y=0*tablero.escala;
   tablero.estado = 1;
@@ -202,12 +206,12 @@ jugar.onPress = function () {
 
 // image will stretch to fill button by default
 config = new Clickable();
-config.image = ininicar;
+config.image = ajustes;
 config.imageScale = 1;
 config.text = "";
-config.color = "0";
-config.locate(2*tablero.escala, 4*tablero.escala);
-config.resize(8*tablero.escala, 8*tablero.escala);
+config.color = "#ffffff";
+config.locate(13*tablero.escala, 20*tablero.escala);
+config.resize(1.5*tablero.escala, 1.5*tablero.escala);
 config.onHover = function () {
   config.imageScale = 1.1;
 }
@@ -216,8 +220,44 @@ config.onOutside = function () {
 }
 
 config.onPress = function () {
+  if(tablero.estado == 1){
+    tablero.estado =2;
+  }
   $('#exampleModal').modal('show');
+}
+
+boton_pausa = new Clickable();
+boton_pausa.image = pausa;
+boton_pausa.imageScale = 1;
+boton_pausa.text = "";
+boton_pausa.color = "#ffffff";
+boton_pausa.locate(15*tablero.escala, 20*tablero.escala);
+boton_pausa.resize(1.5*tablero.escala, 1.5*tablero.escala);
+boton_pausa.onHover = function () {
+  boton_pausa.imageScale = 1.1;
+}
+boton_pausa.onOutside = function () {
+  boton_pausa.imageScale = 1;
+}
+
+boton_pausa.onPress = function () {
+  if(tablero.estado == 2){
+    tablero.estado = 1;
+  }else {
+    tablero.estado = 2;
+  }
+ 
 }
 
 }
   
+function range(x){
+  x = parseFloat(x);
+  console.log(x);
+  tablero.volumen = x;
+}
+
+
+
+
+

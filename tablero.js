@@ -4,6 +4,7 @@ class Tablero{
         this.frames = 0;
         this.casillas = this.array2d(dimy,dimx, '#FFFFFF');
         this.estado = 0;
+        this.volumen =0.3; 
     
 
     }
