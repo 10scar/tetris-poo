@@ -3,9 +3,9 @@ class Tablero{
         this.escala = escala;
         this.frames = 0;
         this.casillas = this.array2d(dimy,dimx, '#FFFFFF');
-        this.estado = 1;
+        this.estado = 0;
         this.volumen =0.3; 
-        this.nivel =9;
+        this.nivel =1;
         this.lineas = 0;
     
 
@@ -179,7 +179,7 @@ class Tablero{
 
     restablecer(){
         this.casillas = this.array2d(this.casillas.length,this.casillas[0].length, '#FFFFFF');
-        this.nivel =0;
+        this.nivel =1;
         this.puntuacion=0;
         this.lineas = 0;
     }

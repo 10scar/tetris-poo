@@ -114,10 +114,10 @@ function keyPressed() {
       case RIGHT_ARROW:
        figura.rotar();
         break;
-    
-      case 87:
+    //solo para debug
+/*       case 87:
           figura.mover(0,-1);
-          break;
+          break; */
       case 83:
           figura.mover(0,1);
           break;

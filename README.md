@@ -11,11 +11,15 @@ Click [aqui](https://10scar.com/tetris-p5) para más documentación
 - HTML
 - Bootstrap
 - ✨p5
+- Sweetalert https://sweetalert.js.org/guides/
+- Libreria p5 clickable https://github.com/Lartu/p5.clickable
+
 
 ## Caracteristicas
 
 - Representacion de la diferentes figuras con bitboards
 - Manipulación de estas
+- Demo de Juego.
 - Temas Predefinidos
 
 
