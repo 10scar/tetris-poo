@@ -26,7 +26,6 @@ function responsive(tamaño){
 
 function setup() {
 
-  //loadrecursos();
   
   responsive(tamaño);
   
@@ -38,8 +37,6 @@ function setup() {
     cnv.position(x, y);
   
 }
-  //control_musica = createSlider(0, 1, 0.2, 0.2);
-  //control_musica.position(20,20);
  
   figura = new Ficha(0,tamaño.escala);
   tablero = new Tablero(tamaño.escala,20,10);
@@ -58,7 +55,6 @@ function draw() {
   tablero.dibujar_marco();
 
   //dinamicas
-  //figura.dinamicas();
   dinamicas();
   
   

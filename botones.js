@@ -1,31 +1,6 @@
 function botones(){
-    //Create, style and resize clickables.
-  jugar = new Clickable();
-  jugar.locate(4*tablero.escala, 4*tablero.escala);
-  jugar.resize(4*tablero.escala, 2*tablero.escala);
-  jugar.text ="JUGAR";
-  //This function is ran when the clickable is hovered but not pressed.
-  jugar.onHover = function () {
-    this.color = "#114DC4";
-  }
-  //This function is ran when the clickable is NOT hovered.
-  jugar.onOutside = function () {
-    this.color = "#1DB2A9";
-    this.textColor = "#FFFFFF";
-  }
-  //This function is ran when the clickable is pressed.
-  jugar.onPress = function () {
-    figura.vida = 0;
-    figura.escala =tablero.escala;
-    figura.x = 4*tablero.escala;
-    figura.y=0*tablero.escala;
-    tablero.estado = 1;
-    //$('#exampleModal').modal('show');
-  }
-  
-  
-  
-  // image will stretch to fill button by default
+    
+  // jugar boton
   jugar = new Clickable();
   jugar.image = ininicar;
   jugar.imageScale = 1;
@@ -41,6 +16,10 @@ function botones(){
   }
   
   jugar.onPress = function () {
+    if($('#exampleModal').is(':visible')){
+
+        return false;
+    }
     if(tablero.estado=3){
         intro.stop();
         tablero.restablecer();
@@ -54,7 +33,7 @@ function botones(){
   }
   
   
-  // image will stretch to fill button by default
+  //
   config = new Clickable();
   config.image = ajustes;
   config.imageScale = 1;
@@ -73,6 +52,10 @@ function botones(){
     if(tablero.estado == 1){
       tablero.estado =2;
     }
+    $('#exampleModal').modal({
+        focus: true,
+        backdrop: 'static'
+      })
     $('#exampleModal').modal('show');
   }
   

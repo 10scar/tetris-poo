@@ -64,39 +64,7 @@ class Ficha{
         }
         return true;
     }
-
-    dinamicas(){
-
-        if(tablero.frames == 60){
-
-            
-            tablero.frames = 0;
-        
-         
-            //verificar colisiones
-            
-            if(this.mover(0,+1))
-            {
-                console.log('ola');
-                //si da true es por que el objeto colisiono y se regenera
-                this.vida = 0;
-                //actualiza el tablero segun la ficha o verifica el game over
-                if(this.verificar(1))
-                {
-                    console.log('gamer over');
-                };
-                
-                this.reiniciar();
-                //verifica si se hace una linea despues de cada colision final.
-                tablero.verificar();
-            }
-            
-        }
-        tablero.frames++;
-    }
-
  
-
     reiniciar(){
     if(this.vida == 0){
         this.color = this.random(colors);
